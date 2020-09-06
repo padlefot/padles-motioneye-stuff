@@ -1,0 +1,9 @@
+#!/bin/bash
+#delete snap before downloading a new one
+rm -rf /etc/motioneye/slack/snapshot.jpg
+#wget -O /etc/motioneye/slack/snapshot.jpg http://<ip>:8765/picture/1/current/?_username=admin&_signature=<sign>
+#couldnt get wget to work after enabling auth so went with curl
+#curl a pic to upload to slack
+curl -o /etc/motioneye/slack/snapshot.jpg 'http://<ip>:8765/picture/1/current/?_username=admin&_signature=<sign>'
+#upload the pic to slack using this script: https://github.com/guzzijason/slack-upload-bash
+/etc/motioneye/slack/upload.sh -s <slack api key> -c '#motioneye' -f /etc/motioneye/slack/snapshot.jpg -m 'jpg' -n 'Latest Picture from Cam'

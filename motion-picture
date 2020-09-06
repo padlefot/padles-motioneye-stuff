@@ -1,0 +1,9 @@
+#!/bin/bash
+#delete the existing snapshot to ensure we get a new one, or nothing
+rm -rf /etc/motioneye/slack/snapshot.jpg
+#wget didnt work so used curl instead
+#wget -O /etc/motioneye/slack/snapshot.jpg http://<ip>:8765/picture/1/current/?_username=admin&_signature=<MotioneyeSignature>
+#curl the picture
+curl -o /etc/motioneye/slack/snapshot.jpg 'http://<motioneyeOS IP>:8765/picture/1/current/?_username=admin&_signature=47ee3c02a599855f60ab7a00530e81864171be4b'
+#upload the picture using this script: https://github.com/guzzijason/slack-upload-bash
+/etc/motioneye/slack/upload.sh -s <slack api key here> -c '#motioneye' -f /etc/motioneye/slack/snapshot.jpg -m 'jpg' -n 'Latest Picture from Cam'

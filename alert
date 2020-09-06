@@ -1,0 +1,2 @@
+date
+echo "MOTION DETECTED @Cam: http://<url>:8765/"
